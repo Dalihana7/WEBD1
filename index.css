@@ -1,19 +1,150 @@
-/* style.css */
+/* Couleurs et Base */
+:root {
+    --netflix-red: #e50914;
+    --netflix-black: #141414;
+    --netflix-yellow: #f5c518; /* Jaune Pop'N'Flix */
+}
+
+body {
+    background-color: var(--netflix-black);
+    color: white;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Barre de décoration tout en haut (Rouge) */
+body::before {
+    content: "";
+    display: block;
+    height: 5px;
+    background-color: var(--netflix-red);
+    width: 100%;
+}
+
+/* Header et Titre */
+header {
+    padding: 20px 50px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, transparent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    color: var(--netflix-yellow);
+    font-size: 2.5rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--netflix-red);
+}
+
+/* 1. Plus d'espace entre les films */
 .movie-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
+    gap: 60px; /* Espace important entre les cartes */
+    padding: 50px;
 }
 
+/* 2. Configuration de la carte pour le zoom global */
 .movie-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
+    position: relative;
+    background: transparent;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Animation fluide */
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
+/* On retire le zoom spécifique à l'image seule s'il y en avait un */
 .movie-card img {
-    border-radius: 5px;
-    max-width: 100%;
+    width: 100%;
+    border-radius: 8px;
+    transition: none; 
+}
+
+/* 3. L'effet de zoom sur TOUTE la carte au survol */
+.movie-card:hover {
+    transform: scale(1.15); /* Zoom de 15% sur tout le bloc */
+    z-index: 10; /* Pour passer par-dessus les voisins */
+}
+
+/* Optionnel : Ajuster les numéros pour qu'ils suivent le mouvement */
+.rank-number {
+    position: absolute;
+    left: -35px;
+    bottom: 10px;
+    font-size: 8rem;
+    font-weight: 900;
+    -webkit-text-stroke: 2px #555;
+    color: rgba(20, 20, 20, 0.8);
+    z-index: -1; /* Derrière l'image pour un look pro */
+    pointer-events: none;
+}
+
+/* Container principal des détails */
+#movie-details {
+    padding: 60px 5%;
+    background: linear-gradient(to bottom, #141414, #000);
+    min-height: 80vh;
+}
+
+.movie-hero {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.details-poster {
+    width: 350px;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    transition: transform 0.3s;
+}
+
+.details-text {
+    flex: 1;
+    color: white;
+}
+
+.details-text h1 {
+    font-size: 3.5rem;
+    color: var(--netflix-red); /* Utilise ton rouge */
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-style: italic;
+    color: var(--netflix-yellow);
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.overview {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 800px;
+}
+
+/* Style des commentaires pour ressembler à ta capture */
+.review-card {
+    background: #1f1f1f;
+    border-left: 5px solid var(--netflix-red);
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 8px;
 }
